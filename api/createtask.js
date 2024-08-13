@@ -12,7 +12,7 @@ const pool = new Pool({
 module.exports = async (req, res) => {
   if (req.method === "POST") {
     try {
-      console.log(req.body);
+      console.log(req);
       const { title, description } = req.body;
 
       if (!title || !description) {
