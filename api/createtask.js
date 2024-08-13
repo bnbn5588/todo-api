@@ -8,11 +8,28 @@ const pool = new Pool({
   },
 });
 
+async function parseJson(req) {
+  return new Promise((resolve, reject) => {
+    let body = "";
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+    req.on("end", () => {
+      try {
+        resolve(JSON.parse(body));
+      } catch (error) {
+        reject(error);
+      }
+    });
+  });
+}
+
 // This is the handler function for the POST endpoint
 module.exports = async (req, res) => {
   if (req.method === "POST") {
     try {
-      const { title, description } = req.body;
+      const body = await parseJson(req); // Manually parse the JSON body
+      const { title, description } = body; // Destructure title and description
 
       console.log(title, description);
       if (!title || !description) {
