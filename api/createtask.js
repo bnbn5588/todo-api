@@ -12,9 +12,9 @@ const pool = new Pool({
 module.exports = async (req, res) => {
   if (req.method === "POST") {
     try {
-      console.log(req);
       const { title, description } = req.body;
 
+      console.log(title, description);
       if (!title || !description) {
         return res.status(400).send("Title and description are required");
       }
