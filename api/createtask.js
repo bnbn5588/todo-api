@@ -31,7 +31,6 @@ module.exports = async (req, res) => {
       const body = await parseJson(req); // Manually parse the JSON body
       const { title, description } = body; // Destructure title and description
 
-      console.log(title, description);
       if (!title || !description) {
         return res.status(400).send("Title and description are required");
       }
